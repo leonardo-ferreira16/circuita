@@ -47,3 +47,4 @@ def root():
 app.include_router(users_router) # Registro do router
 app.include_router(auth_router)
 app.include_router(equipment_router)
+
