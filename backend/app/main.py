@@ -13,8 +13,9 @@ from app.models.notification import Notification
 
 from app.api.users import router as users_router
 from app.api.auth import router as auth_router
+from app.api.maintenance_requests import router as maintenance_requests_router
 from app.api.equipments import router as equipment_router
-
+from app.api.equipment_requests import router as equipment_requests_router
 from app.api.notifications import router as notifications_router
 
 # Criação da aplicação web
@@ -48,6 +49,7 @@ def root():
 
 app.include_router(users_router) # Registro do router
 app.include_router(auth_router)
+app.include_router(maintenance_requests_router)
 app.include_router(equipment_router)
+app.include_router(equipment_requests_router)
 app.include_router(notifications_router)
-
