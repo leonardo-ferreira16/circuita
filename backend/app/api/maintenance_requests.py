@@ -187,6 +187,7 @@ def technical_update_maintenance_request(
         MaintenanceRequestStatus.CANCELADA,
         MaintenanceRequestStatus.REJEITADA,
         MaintenanceRequestStatus.FINALIZADA,
+        MaintenanceRequestStatus.CONCLUIDA,
     }:
         raise HTTPException(
             status_code=400,
@@ -197,12 +198,19 @@ def technical_update_maintenance_request(
         MaintenanceRequestStatus.VALIDADA,
         MaintenanceRequestStatus.MANUTENCAO_INICIADA,
         MaintenanceRequestStatus.FINALIZADA,
+        MaintenanceRequestStatus.CONCLUIDA,
     }
 
     if data.status is not None and data.status not in allowed_technical_status:
         raise HTTPException(
             status_code=400,
             detail="Status inválido para atualização técnica.",
+        )
+
+    if data.cost_avoidance is not None and data.cost_avoidance < 0:
+        raise HTTPException(
+            status_code=400,
+            detail="O valor de cost avoidance não pode ser negativo.",
         )
 
     if data.diagnosis is not None:
